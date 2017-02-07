@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='app'>
+<head>
+    <meta charset="UTF-8">
+    <title>FireBase Chat</title>
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/firebase/firebase.js"></script>
+    <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
+
+</head>
+<body ng-controller="AuthController">
+
+    <button ng-show="!user" ng-click="login()">Login</button>
+    <button ng-show="user" ng-click="logout()">Logout</button>
+
+    <div>
+        <p>{{user.name}}</p>
+<!--         <p>{{user.id}}</p>
+        <img src="{{user.photo}}"> -->
+    </div>
+
+<div">
+    <button ng-click="loadMessages()">Load Messages</button>
+    <div>
+      <ul>
+        <li ng-repeat="message in messagesList"><img src="{{message.user.photo}}" alt=""> {{message.message}}</li>
+      </ul>
+    </div>
+
+    <div>
+      <form action="">
+        <input type="text" ng-model="lastMessage">
+        <button ng-click="sendMessage($event, lastMessage, user)">Send</button>
+        </form>
+    </div>
+</div>
+    <script>
+
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDk7C1hAElksAaNFF3yP9HSi_hMpuSaqd0",
+        authDomain: "skylab-chat-ecb25.firebaseapp.com",
+        databaseURL: "https://skylab-chat-ecb25.firebaseio.com",
+        storageBucket: "skylab-chat-ecb25.appspot.com",
+        messagingSenderId: "584795510634"
+      };
+      firebase.initializeApp(config);
+
+    </script>
+    <script src="app.module.js"></script>
+    <script src="skyLabControllers.js"></script>
+    <script src="AuthController.js"></script>
+    <script src="ChatController.js"></script>
+
+</body>
+</html>
